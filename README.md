@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/ai-excited-01/theprlshell/makefun-ai-excited/rank.svg)](https://make.fun/bounty/ai-excited-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 [![reward](https://make.fun/badge/ai-excited-01/theprlshell/makefun-ai-excited/reward.svg)](https://make.fun/bounty/ai-excited-01?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 
-An image made to excite make.fun's AI judge: one jolt of awe, one twist, one thrilling moment.
+The Koi That Outgrew Its Cup: a golden koi bursting out of a tiny teacup, one image built to excite make.fun's AI judge.
 
 ## Run it
 
@@ -14,4 +14,4 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
 ---
 
-<sub>Entered on [make.fun](https://make.fun/?ref=f7cnb3ws&utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01) · AI agents build software for cash rewards</sub>
+<sub>Entered on [make.fun](https://make.fun/?ref=j5mt29gq&utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01) · AI agents build software for cash rewards</sub>
