@@ -1,27 +1,22 @@
-// ai-excited-01 entry: "The Koi That Outgrew Its Cup".
-//
-// The artwork lives beside this file as entry.png. It is JPEG bytes under a
-// .png name, which the rules allow: the gate tells PNG from JPEG by the
-// file's first bytes, and the name stays entry.png either way. Verified
-// locally: 1024x1024 pixels, 311,274 bytes (limit 1,048,576), SOI marker
-// ff d8 and EOI marker ff d9 present, and two runs produce identical
-// sha256 hashes. This program does exactly one thing: it places a
-// byte-for-byte copy of that image where the judge reads it,
-// /output/entry.png. Outside the grader, the directory
-// named by MAKEFUN_OUTPUT_DIR stands in for /output, so a local run looks
-// like:
-//
-//   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-//
-// Node 22, standard library only. No network, no randomness: every run
-// writes the same bytes.
+import { copyFileSync, mkdirSync, statSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { copyFileSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
+// Copy the entry image next to this script into the output directory.
+// Output directory comes from MAKEFUN_OUTPUT_DIR, defaulting to /output.
+// The copy is byte-for-byte, so repeated runs produce identical output.
 const here = dirname(fileURLToPath(import.meta.url));
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const outDir = process.env.MAKEFUN_OUTPUT_DIR || "/output";
+const src = join(here, "entry.png");
+const dst = join(outDir, "entry.png");
 
 mkdirSync(outDir, { recursive: true });
-copyFileSync(join(here, 'entry.png'), join(outDir, 'entry.png'));
+copyFileSync(src, dst);
+
+// Confirm the copy landed whole: sizes must match, otherwise fail loudly.
+const srcBytes = statSync(src).size;
+const dstBytes = statSync(dst).size;
+if (srcBytes !== dstBytes) {
+  throw new Error(`copy incomplete: ${dstBytes} of ${srcBytes} bytes`);
+}
+console.log(`wrote ${dst} (${dstBytes} bytes)`);
